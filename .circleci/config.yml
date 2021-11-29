@@ -28,7 +28,8 @@ jobs:
       - attach_workspace:
           at: ./
       - run: ls coverage
-      - run: cat coverage/coverage-final.json
+      - run: npx istanbul-merge --out coverage.json ./coverage/0/coverage-final.json ./coverage/1/coverage-final.json ./coverage/2/coverage-final.json
+      - run: cat coverage.json
 
 workflows:
   build-coverage:
