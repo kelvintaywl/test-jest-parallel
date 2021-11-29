@@ -29,15 +29,15 @@ jobs:
       - checkout
       - attach_workspace:
           at: ./
-      - run: ls coverage
-      - run: npx istanbul-merge --out coverage.json ./coverage/0/coverage-final.json ./coverage/1/coverage-final.json ./coverage/2/coverage-final.json ./coverage/3/coverage-final.json
-      - run: cat coverage.json
+      - run: |
+          mkdir .nyc_output
+          cp -r ./coverage/ .nyc_output/
       - run:
           name: extract Jest coverage setup
           command: |
             jq ".jest.coverageThreshold.global" package.json | jq '. + {"check-coverage": true}' > .nycrc
             cat .nycrc | jq .
-      - run: npx istanbul report text
+      - run: npx nyc report
 
 workflows:
   build-coverage:
