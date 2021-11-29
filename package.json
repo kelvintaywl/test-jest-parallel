@@ -20,5 +20,17 @@
   "dependencies": {
     "axios": "^0.24.0",
     "jest": "^27.3.1"
+  },
+  "jest": {
+    "verbose": true,
+    "coverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
   }
 }
