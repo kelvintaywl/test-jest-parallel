@@ -26,6 +26,7 @@ jobs:
     docker:
       - image: cimg/node:current
     steps:
+      - checkout
       - attach_workspace:
           at: ./
       - run: ls coverage
