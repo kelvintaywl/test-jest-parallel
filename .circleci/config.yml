@@ -4,7 +4,16 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/node:current
+    parallelism: 3
     steps:
       - checkout
-      - run: echo "Hello"
+      - run: npm install
+      - run:
+          name: "Run Jest and Collect Coverage Reports"
+          command: |
+            TESTFILES=$(circleci tests glob "./*.test.js" | circleci tests split --split-by=timings)
+            echo $TESTFILES
+            npx jest --collectCoverage=true $TESTFILES
+      - store_artifacts:
+          path: coverage
