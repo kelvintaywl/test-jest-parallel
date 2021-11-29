@@ -28,6 +28,7 @@ jobs:
       - attach_workspace:
           at: ./
       - run: ls coverage
+      - run: cat coverage/coverage-final.json
 
 workflows:
   build-coverage:
