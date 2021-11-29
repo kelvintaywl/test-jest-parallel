@@ -35,7 +35,7 @@ jobs:
       - run:
           name: extract Jest coverage setup
           command: |
-            jq ".jest.coverageThreshold.global" package.json | jq '. + {"collect-coverage": true}' > .nycrc
+            jq ".jest.coverageThreshold.global" package.json | jq '. + {"check-coverage": true}' > .nycrc
             cat .nycrc | jq .
       - run: npx istanbul report text
 
