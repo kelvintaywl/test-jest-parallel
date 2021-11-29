@@ -28,13 +28,15 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
-      - checkout
-      - run: npm install
       - run: ls coverage
       - run: npx istanbul-merge --out coverage.json ./coverage/0/coverage-final.json ./coverage/1/coverage-final.json ./coverage/2/coverage-final.json
       - run: cat coverage.json
-      # - run: npx istanbul report text
-      - run: npx jest --coverage
+      - run:
+          name: extract Jest coverage setup
+          command: |
+            jq ".jest.coverageThreshold.global" package.json | jq '. + {"collect-coverage": true}' > .nycrc
+            cat .nycrc | jq .
+      - run: npx istanbul report text
 
 workflows:
   build-coverage:
