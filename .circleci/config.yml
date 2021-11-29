@@ -14,7 +14,7 @@ jobs:
           command: |
             TESTFILES=$(circleci tests glob "./*.test.js" | circleci tests split --split-by=timings)
             echo $TESTFILES
-            npx jest --collectCoverage=true $TESTFILES
+            npx jest --coverageDirectory="coverage/${CIRCLE_NODE_INDEX}" $TESTFILES
       - store_artifacts:
           path: coverage
       - persist_to_workspace:
