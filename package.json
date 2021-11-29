@@ -23,7 +23,7 @@
   },
   "jest": {
     "verbose": true,
-    "coverage": true,
+    "collectCoverage": true,
     "coverageThreshold": {
       "global": {
         "branches": 100,
