@@ -17,3 +17,22 @@ jobs:
             npx jest --collectCoverage=true $TESTFILES
       - store_artifacts:
           path: coverage
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - coverage
+  coverage:
+    docker:
+      - image: cimg/node:current
+    steps:
+      - attach_workspace:
+          at: ./
+      - run: ls coverage
+
+workflows:
+  build-coverage:
+    jobs:
+      - build
+      - coverage:
+          requires:
+            - build
