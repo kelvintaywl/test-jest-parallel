@@ -5,7 +5,7 @@ jobs:
   build:
     docker:
       - image: cimg/node:current
-    parallelism: 3
+    parallelism: 4
     steps:
       - checkout
       - run: npm install
